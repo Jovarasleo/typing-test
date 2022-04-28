@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="statistics">
+        <div class="timer"></div>
+        <div class="counter"></div>
+      </div>
+      <div class="appWrapper">
+        <div class="firstHalf">
+          <div class="writtenWords">
+            <div class="input" contenteditable="true"></div>
+          </div>
+        </div>
+        <div class="secondHalf"></div>
+      </div>
+    </div>
+    <script type="module" src="./util/timer.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
