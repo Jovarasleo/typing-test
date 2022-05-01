@@ -4,7 +4,7 @@ import addArrItem from "./util//offLoadData";
 import keyCodes from "./data/keyCodes";
 import shuffled from "./util/shuffledArray";
 import getCaretPosition from "./util/getCaretPosition";
-import Timer from "./util/timer";
+
 const selectInput = document.querySelector(".input");
 const selectApp = document.querySelector("#app");
 const selectDataArray = document.querySelector(".secondHalf");
@@ -17,7 +17,7 @@ let currentWord = shuffled[wordIndex];
 let input = "";
 let wordsCounter = 0;
 
-selectInput.addEventListener("keydown", (e) => {
+window.addEventListener("keydown", (e) => {
   let position = getCaretPosition(e.target);
   if (e.keyCode === 32 || e.keyCode === 13) {
     e.preventDefault();
@@ -44,10 +44,6 @@ selectInput.addEventListener("keydown", (e) => {
     if (currentWord.slice(0, input.length) == input) {
       selectDataArray.firstChild.textContent = currentWord.slice(input.length);
     }
-    if (charIndex === 0) {
-      input = "";
-      selectDataArray.firstChild.textContent = currentWord;
-    }
   }
 
   if (keyCodes.includes(e.keyCode)) {
@@ -61,12 +57,21 @@ selectInput.addEventListener("keydown", (e) => {
       selectDataArray.firstChild.textContent = modifiedWord.slice(1);
     }
   }
+});
 
+window.addEventListener("input", () => {
   if (currentWord.slice(0, input.length) == input) {
     selectInput.classList.remove("incorrect");
   } else selectInput.classList.add("incorrect");
+
+  if (selectInput.textContent.length === 0) {
+    input = "";
+    selectDataArray.firstChild.textContent = currentWord;
+    console.log("no input");
+  }
 });
-//focus cursor on input
+
+selectInput.addEventListener("paste", (e) => e.preventDefault());
 selectApp.addEventListener("click", () => {
   selectInput.focus();
 });
