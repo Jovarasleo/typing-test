@@ -1,27 +1,30 @@
-var seconds = 59;
-var timer;
+import backdrop from "../component/backdrop";
+let seconds = 3;
+let timer;
+const countToDate = new Date();
+let previousTimeBetweenDates;
+
 function Timer() {
-  if (seconds < 60) {
-    // I want it to say 1:00, not 60
-    document.querySelector(".timer").innerHTML = seconds;
-  }
   if (seconds > 0) {
-    // so it doesn't go to -1
     seconds--;
+    document.querySelector(".card--timer").innerHTML = seconds;
   } else {
     clearInterval(timer);
+    backdrop();
   }
 }
-document.querySelector(".input").addEventListener("keydown", () => {
-  (function () {
-    if (!timer) {
-      document.querySelector(".timer").innerHTML = seconds;
-      timer = window.setInterval(function () {
+function startTimer() {
+  if (!timer) {
+    timer = setInterval(function () {
+      const currentDate = new Date();
+      const timeBetweenDates = Math.ceil((currentDate - countToDate) / 1000);
+      if (previousTimeBetweenDates !== timeBetweenDates) {
         Timer();
-      }, 1000); // every second
-    }
-  })();
-});
-
-document.querySelector(".timer").innerHTML = "60";
-export default Timer;
+      }
+      previousTimeBetweenDates = timeBetweenDates;
+    }, 250);
+  }
+  return seconds;
+}
+document.querySelector(".card--timer").innerHTML = seconds;
+export default startTimer;
