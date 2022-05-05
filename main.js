@@ -61,10 +61,13 @@ selectInput.addEventListener("keydown", (e) => {
       writtenDataArray.push(input);
       e.preventDefault();
       charIndex = 0;
-      input = "";
+
       if (selectInput.textContent) {
         wordIndex++;
         if (selectInput.textContent === currentWord) {
+          charCounter += input.length;
+          console.log(charCounter);
+          selectCharCounter.textContent = charCounter;
           wordsCounter++;
           selectWordsCounter.textContent = wordsCounter;
         }
@@ -75,14 +78,13 @@ selectInput.addEventListener("keydown", (e) => {
         loadArray(selectDataArray, wordIndex);
         selectInput.textContent = "";
       }
+      input = "";
       currentWord = shuffled[wordIndex];
     }
     if (e.key === "Backspace" && charIndex >= 1 && position > 0) {
       input = input.slice(0, position - 1) + input.slice(position);
-      charIndex = charIndex - 1;
+      charIndex--;
       if (currentWord.slice(0, input.length) == input) {
-        charCounter--;
-        selectCharCounter.textContent = charCounter;
         selectDataArray.firstChild.textContent = currentWord.slice(
           input.length
         );
@@ -96,8 +98,6 @@ selectInput.addEventListener("keydown", (e) => {
         currentWord.slice(0, input.length) === input &&
         position === input.length - 1
       ) {
-        charCounter++;
-        selectCharCounter.textContent = charCounter;
         let modifiedWord = selectDataArray.firstChild.textContent;
         selectDataArray.firstChild.textContent = modifiedWord.slice(1);
       }
@@ -120,7 +120,7 @@ selectInput.addEventListener("paste", (e) => e.preventDefault());
 selectApp.addEventListener("click", () => {
   selectInput.focus();
 });
-//initiate data load
+
 window.addEventListener("load", () => {
   selectWordsCounter.textContent = wordsCounter;
   loadArray(selectDataArray, wordIndex);
