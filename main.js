@@ -17,12 +17,12 @@ let wordIndex = 0;
 let charIndex = 0;
 let currentWord = shuffled[wordIndex];
 let input = "";
-let wordsCounter = 0;
-let charCounter = 0;
+export let accuracy;
+export let wordsCounter = 0;
+export let charCounter = 0;
 
 selectInput.addEventListener("keydown", (e) => {
   let seconds = startTimer();
-  console.log(seconds);
   if (seconds !== 0) {
     let position = getCaretPosition(e.target);
     if (e.keyCode === 32 || e.keyCode === 13) {
@@ -35,9 +35,8 @@ selectInput.addEventListener("keydown", (e) => {
           wordsCounter++;
           selectWordsCounter.textContent = wordsCounter;
         }
-        selectAccuracyCounter.textContent = Math.round(
-          (wordsCounter / wordIndex) * 100
-        );
+        accuracy = Math.round((wordsCounter / wordIndex) * 100);
+        selectAccuracyCounter.textContent = accuracy;
         addArrItem(writtenWordsArr, selectInput.textContent, currentWord);
         //reload words array
         selectDataArray.innerHTML = "";

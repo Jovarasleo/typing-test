@@ -26,8 +26,8 @@ body {
 
 .statistics {
   display: flex;
-  height: 200px;
-  align-items: center;
+  height: 250px;
+
   justify-content: space-around;
 }
 .statistics__card {

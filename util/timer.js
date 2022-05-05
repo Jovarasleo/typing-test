@@ -1,5 +1,6 @@
 import backdrop from "../component/backdrop";
-let seconds = 3;
+
+let seconds = 60;
 let timer;
 const countToDate = new Date();
 let previousTimeBetweenDates;
