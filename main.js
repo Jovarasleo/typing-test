@@ -113,7 +113,6 @@ selectInput.addEventListener("input", () => {
   if (selectInput.textContent.length === 0) {
     input = "";
     selectDataArray.firstChild.textContent = currentWord;
-    console.log("no input");
   }
 });
 
