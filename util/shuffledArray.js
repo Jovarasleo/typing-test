@@ -1,5 +1,5 @@
 import words from "../data/data";
-function randomArrayShuffle() {
+export function randomArrayShuffle() {
   var currentIndex = words.length;
   let temporaryValue;
   let randomIndex;

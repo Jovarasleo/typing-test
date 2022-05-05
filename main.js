@@ -4,7 +4,7 @@ import addArrItem from "./util//offLoadData";
 import keyCodes from "./data/keyCodes";
 import shuffled from "./util/shuffledArray";
 import getCaretPosition from "./util/getCaretPosition";
-import startTimer from "./util/timer";
+import myTimer from "./util/timer";
 
 const selectInput = document.querySelector(".input");
 const selectApp = document.querySelector("#app");
@@ -13,19 +13,52 @@ const writtenWordsArr = document.querySelector(".writtenWords");
 const selectWordsCounter = document.querySelector(".card--wordCounter");
 const selectCharCounter = document.querySelector(".card--charCounter");
 const selectAccuracyCounter = document.querySelector(".card--accuracyCountery");
-let wordIndex = 0;
-let charIndex = 0;
-let currentWord = shuffled[wordIndex];
-let input = "";
+
+var wordIndex = 0;
+var charIndex = 0;
+var currentWord = shuffled[wordIndex];
+var input = "";
+let dataArray = [];
+let writtenDataArray = [];
+let startTimer = true;
+
 export let accuracy;
 export let wordsCounter = 0;
 export let charCounter = 0;
 
+export function reset() {
+  charIndex = 0;
+  currentWord = shuffled[wordIndex];
+  input = "";
+  wordsCounter = 0;
+  charCounter = 0;
+  wordIndex = 0;
+  startTimer = true;
+  dataArray = [];
+  writtenDataArray = [];
+
+  selectAccuracyCounter.textContent = 0;
+  selectInput.textContent = "";
+  selectCharCounter.textContent = charCounter;
+  selectWordsCounter.textContent = wordsCounter;
+  selectDataArray.innerHTML = "";
+  loadArray(selectDataArray, wordIndex, true);
+  currentWord = shuffled[wordIndex];
+  selectDataArray.firstChild.textContent = currentWord;
+  addArrItem(writtenWordsArr, dataArray, writtenDataArray);
+}
+
 selectInput.addEventListener("keydown", (e) => {
-  let seconds = startTimer();
-  if (seconds !== 0) {
+  if (startTimer) {
+    startTimer = false;
+    myTimer(1000).start();
+  }
+
+  if (myTimer().interval !== 0) {
     let position = getCaretPosition(e.target);
     if (e.keyCode === 32 || e.keyCode === 13) {
+      dataArray.push(currentWord);
+      writtenDataArray.push(input);
       e.preventDefault();
       charIndex = 0;
       input = "";
@@ -37,11 +70,9 @@ selectInput.addEventListener("keydown", (e) => {
         }
         accuracy = Math.round((wordsCounter / wordIndex) * 100);
         selectAccuracyCounter.textContent = accuracy;
-        addArrItem(writtenWordsArr, selectInput.textContent, currentWord);
-        //reload words array
+        addArrItem(writtenWordsArr, dataArray, writtenDataArray);
         selectDataArray.innerHTML = "";
-        loadArray(selectDataArray, wordIndex, currentWord);
-        //clear input
+        loadArray(selectDataArray, wordIndex);
         selectInput.textContent = "";
       }
       currentWord = shuffled[wordIndex];
@@ -93,5 +124,5 @@ selectApp.addEventListener("click", () => {
 //initiate data load
 window.addEventListener("load", () => {
   selectWordsCounter.textContent = wordsCounter;
-  loadArray(selectDataArray, wordIndex, currentWord);
+  loadArray(selectDataArray, wordIndex);
 });

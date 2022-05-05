@@ -4,7 +4,8 @@ import { wordsCounter, charCounter, accuracy } from "../../main";
 import Turtle from "../../images/Turtle.png";
 import Monkey from "../../images/Monkey.png";
 import Squid from "../../images/Squid.png";
-
+import { reset } from "../../main";
+import timer from "../../util/timer";
 function backdrop() {
   const backdrop = createElement("div", [{ class: "backdrop" }]);
   const contentCard = createElement("div", [{ class: "backdrop__card" }]);
@@ -14,15 +15,15 @@ function backdrop() {
   const p = createElement("p", [{ class: "text--paragraph" }]);
   const title = createElement("h4", [{ class: "text--title" }]);
   const img = createElement("img", [{ class: "image--img" }]);
-  if (wordsCounter < 2) {
+  if (wordsCounter < 20) {
     img.src = Turtle;
     title.textContent = "You are a Turtle!";
   }
-  if (wordsCounter >= 2 && wordsCounter < 4) {
+  if (wordsCounter >= 20 && wordsCounter < 40) {
     img.src = Monkey;
     title.textContent = "You are a Monkey!";
   }
-  if (wordsCounter >= 4) {
+  if (wordsCounter >= 40) {
     img.src = Squid;
     title.textContent = "You are a Squid!";
   }
@@ -39,6 +40,8 @@ function backdrop() {
     event.stopPropagation();
   });
   backdrop.addEventListener("click", () => {
+    reset();
+    timer().reset();
     backdrop.remove();
   });
 }
