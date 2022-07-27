@@ -1,6 +1,6 @@
 import createElement from "./createElement";
 
-export default function offloadData(
+function offloadData(
   writtenWordsContainer,
   dataArray,
   writtenDataArray,
@@ -17,3 +17,4 @@ export default function offloadData(
     writtenWordsContainer.insertBefore(element, selectInput);
   });
 }
+export default offloadData;
