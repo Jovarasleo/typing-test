@@ -9,6 +9,7 @@
 .backdrop__card {
   position: absolute;
   top: 50%;
+  transform: translate(0, -50%);
   margin: 20px;
   box-sizing: border-box;
   padding: 20px;

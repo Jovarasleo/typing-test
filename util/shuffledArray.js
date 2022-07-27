@@ -1,16 +1,15 @@
-import words from "../data/data";
-export function randomArrayShuffle() {
-  var currentIndex = words.length;
+function randomArrayShuffle(array) {
+  var currentIndex = array.length;
   let temporaryValue;
   let randomIndex;
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    temporaryValue = words[currentIndex];
-    words[currentIndex] = words[randomIndex];
-    words[randomIndex] = temporaryValue;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
-  return words;
+  return array;
 }
-const shuffled = randomArrayShuffle();
-export default shuffled;
+
+export default randomArrayShuffle;

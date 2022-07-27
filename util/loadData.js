@@ -1,14 +1,8 @@
-import shuffled from "./shuffledArray";
-import { randomArrayShuffle } from "./shuffledArray";
-function loadArray(selectDataArray, wordIndex, reShuffle) {
-  if (reShuffle) {
-    randomArrayShuffle();
-  }
+import createElement from "./createElement";
+function loadArray(selectDataArray, wordIndex, shuffled) {
   shuffled.slice(0 + wordIndex, 20 + wordIndex).map((word) => {
-    const element = document.createElement("span");
-    element.classList = "word";
-    element.textContent = word;
-    selectDataArray.append(element);
+    const wordEl = createElement("span", [{ class: "word" }], word);
+    selectDataArray.append(wordEl);
   });
 }
 export default loadArray;
