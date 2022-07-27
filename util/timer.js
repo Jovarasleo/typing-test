@@ -1,6 +1,5 @@
-const selectTimer = document.querySelector(".card--timer");
 let interval;
-export default function timer(defaultTime, backdrop) {
+export default function timer(defaultTime, backdrop, selectTimer) {
   let timeout;
   let expected;
 

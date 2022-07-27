@@ -1,10 +1,10 @@
 import createElement from "./createElement";
 
-const input = document.querySelector(".input");
 export default function offloadData(
   writtenWordsContainer,
   dataArray,
-  writtenDataArray
+  writtenDataArray,
+  selectInput
 ) {
   document.querySelectorAll(".writtenWord").forEach((el) => {
     el.remove();
@@ -14,6 +14,6 @@ export default function offloadData(
     if (item !== dataArray[index]) {
       element.classList.add("incorrect");
     }
-    writtenWordsContainer.insertBefore(element, input);
+    writtenWordsContainer.insertBefore(element, selectInput);
   });
 }

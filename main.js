@@ -54,22 +54,22 @@ function reset() {
   loadData(wordsContainer, wordIndex, shuffled);
   currentWord = shuffled[wordIndex];
   wordsContainer.firstChild.textContent = currentWord;
-  offloadData(writtenWordsContainer, dataArray, writtenDataArray);
+  offloadData(writtenWordsContainer, dataArray, writtenDataArray, selectInput);
 }
 
 selectInput.addEventListener("keydown", (e) => {
-  console.log(e);
   if (startTimer) {
     startTimer = false;
-    timer(defaultTime, () =>
-      backdrop(reset, wordsCounter, charCounter, accuracy)
+    timer(
+      defaultTime,
+      () => backdrop(reset, wordsCounter, charCounter, accuracy),
+      selectTimer
     ).start();
   }
 
   if (timer().interval !== 0) {
     let position = getCaretPosition(e.target);
     if (e.keyCode === 32 || e.keyCode === 13) {
-      console.log(input);
       e.preventDefault();
       dataArray.push(currentWord);
       charIndex = 0;
@@ -86,7 +86,12 @@ selectInput.addEventListener("keydown", (e) => {
         }
         accuracy = Math.round((wordsCounter / wordIndex) * 100);
         selectAccCounter.textContent = accuracy;
-        offloadData(writtenWordsContainer, dataArray, writtenDataArray);
+        offloadData(
+          writtenWordsContainer,
+          dataArray,
+          writtenDataArray,
+          selectInput
+        );
         wordsContainer.innerHTML = "";
         loadData(wordsContainer, wordIndex, shuffled);
         selectInput.textContent = "";
