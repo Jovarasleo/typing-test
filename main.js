@@ -2,7 +2,7 @@ import keyCodes from "./data/keyCodes";
 import words from "./data/data";
 
 import loadData from "./util/loadData";
-import offloadData from "./util/offloadData";
+import offLoadData from "./util/offLoadData";
 import shuffleArray from "./util/shuffleArray";
 import getCaretPosition from "./util/getCaretPosition";
 import timer from "./util/timer";
@@ -54,7 +54,7 @@ function reset() {
   loadData(wordsContainer, wordIndex, shuffled);
   currentWord = shuffled[wordIndex];
   wordsContainer.firstChild.textContent = currentWord;
-  offloadData(writtenWordsContainer, dataArray, writtenDataArray, selectInput);
+  offLoadData(writtenWordsContainer, dataArray, writtenDataArray, selectInput);
 }
 
 selectInput.addEventListener("keydown", (e) => {
@@ -86,7 +86,7 @@ selectInput.addEventListener("keydown", (e) => {
         }
         accuracy = Math.round((wordsCounter / wordIndex) * 100);
         selectAccCounter.textContent = accuracy;
-        offloadData(
+        offLoadData(
           writtenWordsContainer,
           dataArray,
           writtenDataArray,
