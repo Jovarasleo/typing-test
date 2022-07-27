@@ -1,8 +1,8 @@
-import "./index.css";
 import createElement from "../../util/createElement";
 import Turtle from "../../images/Turtle.png";
 import Monkey from "../../images/Monkey.png";
 import Squid from "../../images/Squid.png";
+import "./index.css";
 
 function backdrop(reset, wordsCounter, charCounter, accuracy) {
   const backdrop = createElement("div", [{ class: "backdrop" }]);
@@ -10,7 +10,7 @@ function backdrop(reset, wordsCounter, charCounter, accuracy) {
   const imageContainer = createElement("div", [{ class: "card--image" }]);
   const textContainer = createElement("div", [{ class: "card--text" }]);
 
-  const p = createElement("p", [{ class: "text--paragraph" }]);
+  const paragraph = createElement("p", [{ class: "text--paragraph" }]);
   const title = createElement("h4", [{ class: "text--title" }]);
   const img = createElement("img", [{ class: "image--img" }]);
 
@@ -27,9 +27,9 @@ function backdrop(reset, wordsCounter, charCounter, accuracy) {
     title.textContent = "You are a Squid!";
   }
 
-  p.textContent = `You type with the speed of ${wordsCounter} WPM (${charCounter} CPM). Your accuracy was ${accuracy}%. Congratulations!`;
+  paragraph.textContent = `You type with the speed of ${wordsCounter} WPM (${charCounter} CPM). Your accuracy was ${accuracy}%. Congratulations!`;
 
-  textContainer.append(title, p);
+  textContainer.append(title, paragraph);
   imageContainer.append(img);
   contentCard.append(imageContainer, textContainer);
   backdrop.append(contentCard);

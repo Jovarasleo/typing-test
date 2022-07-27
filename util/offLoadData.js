@@ -1,7 +1,11 @@
-import "../style.css";
 import createElement from "./createElement";
+
 const input = document.querySelector(".input");
-function addArrItem(writtenWordsArr, dataArray, writtenDataArray) {
+export default function offloadData(
+  writtenWordsContainer,
+  dataArray,
+  writtenDataArray
+) {
   document.querySelectorAll(".writtenWord").forEach((el) => {
     el.remove();
   });
@@ -10,8 +14,6 @@ function addArrItem(writtenWordsArr, dataArray, writtenDataArray) {
     if (item !== dataArray[index]) {
       element.classList.add("incorrect");
     }
-
-    writtenWordsArr.insertBefore(element, input);
+    writtenWordsContainer.insertBefore(element, input);
   });
 }
-export default addArrItem;

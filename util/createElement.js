@@ -1,4 +1,4 @@
-function createElement(el, attributes, textContent) {
+export default function createElement(el, attributes, textContent) {
   const element = document.createElement(el);
   if (attributes) {
     attributes.forEach((att) => {
@@ -10,4 +10,3 @@ function createElement(el, attributes, textContent) {
   }
   return element;
 }
-export default createElement;

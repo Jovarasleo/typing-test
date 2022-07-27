@@ -47,6 +47,7 @@ body {
   font-size: 12px;
 }
 .appWrapper {
+  line-height: 3.5;
   overflow: hidden;
   width: 100%;
   display: flex;
@@ -62,17 +63,16 @@ div {
 .word {
   margin-right: 10px;
 }
-.firstHalf {
+.inputWrapper {
   width: 50%;
   overflow: hidden;
 }
-.secondHalf {
+.upcomingWords {
   width: 50%;
   position: relative;
   overflow: hidden;
 }
 .writtenWords {
-  line-height: 3.5;
   white-space: nowrap;
   text-align: right;
   display: flex;
@@ -84,7 +84,7 @@ div {
   display: inline-block;
 }
 .input {
-  display: inline-block;
+  padding-left: 0.25rem;
   outline: none;
   caret-color: #161616;
   color: #006eff;

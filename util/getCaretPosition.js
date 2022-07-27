@@ -1,4 +1,4 @@
-function getCaretPosition(element) {
+export default function getCaretPosition(element) {
   let caretOffset = 0;
   let doc = element.ownerDocument || element.document;
   let win = doc.defaultView || doc.parentWindow;
@@ -21,4 +21,3 @@ function getCaretPosition(element) {
   }
   return caretOffset;
 }
-export default getCaretPosition;

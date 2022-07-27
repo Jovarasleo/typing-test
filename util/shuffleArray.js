@@ -1,4 +1,4 @@
-function randomArrayShuffle(array) {
+export default function shuffleArray(array) {
   var currentIndex = array.length;
   let temporaryValue;
   let randomIndex;
@@ -11,5 +11,3 @@ function randomArrayShuffle(array) {
   }
   return array;
 }
-
-export default randomArrayShuffle;
