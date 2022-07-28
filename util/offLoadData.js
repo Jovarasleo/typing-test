@@ -1,6 +1,6 @@
 import createElement from "./createElement";
 
-export default function offloadData(
+export default function offLoadData(
   writtenWordsContainer,
   dataArray,
   writtenDataArray,

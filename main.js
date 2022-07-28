@@ -67,58 +67,54 @@ selectInput.addEventListener("keydown", (e) => {
     ).start();
   }
 
-  if (timer().interval !== 0) {
-    let position = getCaretPosition(e.target);
-    if (e.keyCode === 32 || e.keyCode === 13) {
-      e.preventDefault();
+  if (timer().interval === 0) return e.preventDefault();
+  let position = getCaretPosition(e.target);
+  if (e.keyCode === 32 || e.keyCode === 13) {
+    e.preventDefault();
+    charIndex = 0;
+    if (input.length) {
       dataArray.push(currentWord);
-      charIndex = 0;
-      if (input.length) {
-        writtenDataArray.push(input);
-      }
-      if (selectInput.textContent) {
-        wordIndex++;
-        if (selectInput.textContent === currentWord) {
-          charCounter += input.length;
-          selectCharCounter.textContent = charCounter;
-          wordsCounter++;
-          selectWordsCounter.textContent = wordsCounter;
-        }
-        accuracy = Math.round((wordsCounter / wordIndex) * 100);
-        selectAccCounter.textContent = accuracy;
-        offLoadData(
-          writtenWordsContainer,
-          dataArray,
-          writtenDataArray,
-          selectInput
-        );
-        wordsContainer.innerHTML = "";
-        loadData(wordsContainer, wordIndex, shuffled);
-        selectInput.textContent = "";
-      }
-      input = "";
-      currentWord = shuffled[wordIndex];
+      writtenDataArray.push(input);
+      wordIndex++;
     }
-    if (e.keyCode === 8 && charIndex >= 1 && position > 0) {
-      input = input.slice(0, position - 1) + input.slice(position);
-      charIndex--;
-      if (currentWord.slice(0, input.length) == input) {
-        wordsContainer.firstChild.textContent = currentWord.slice(input.length);
-      }
+    if (selectInput.textContent === currentWord) {
+      charCounter += input.length;
+      wordsCounter++;
+      selectCharCounter.textContent = charCounter;
+      selectWordsCounter.textContent = wordsCounter;
     }
+    accuracy = Math.round((wordsCounter / wordIndex) * 100);
+    selectAccCounter.textContent = accuracy;
+    offLoadData(
+      writtenWordsContainer,
+      dataArray,
+      writtenDataArray,
+      selectInput
+    );
+    wordsContainer.innerHTML = "";
+    loadData(wordsContainer, wordIndex, shuffled);
+    selectInput.textContent = "";
+    input = "";
+    currentWord = shuffled[wordIndex];
+  }
+  if (e.keyCode === 8 && charIndex >= 1 && position > 0) {
+    input = input.slice(0, position - 1) + input.slice(position);
+    charIndex--;
+    if (currentWord.slice(0, input.length) == input) {
+      wordsContainer.firstChild.textContent = currentWord.slice(input.length);
+    }
+  }
 
-    if (keyCodes.includes(e.keyCode)) {
-      input = [input.slice(0, position), e.key, input.slice(position)].join("");
-      charIndex++;
-      if (
-        currentWord.slice(0, input.length) === input &&
-        position === input.length - 1
-      ) {
-        let modifiedWord = wordsContainer.firstChild.textContent;
-        wordsContainer.firstChild.textContent = modifiedWord.slice(1);
-      }
-    }
-  } else e.preventDefault();
+  if (!keyCodes.includes(e.keyCode)) return;
+  input = [input.slice(0, position), e.key, input.slice(position)].join("");
+  charIndex++;
+  if (
+    currentWord.slice(0, input.length) === input &&
+    position === input.length - 1
+  ) {
+    let modifiedWord = wordsContainer.firstChild.textContent;
+    wordsContainer.firstChild.textContent = modifiedWord.slice(1);
+  }
 });
 
 selectInput.addEventListener("input", () => {
