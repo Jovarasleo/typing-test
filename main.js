@@ -28,7 +28,7 @@ let charIndex = 0;
 let input = "";
 let dataArray = [];
 let writtenDataArray = [];
-let accuracy;
+let accuracy = 0;
 let wordsCounter = 0;
 let charCounter = 0;
 let startTimer = true;
@@ -66,17 +66,15 @@ selectInput.addEventListener("keydown", (e) => {
       selectTimer
     ).start();
   }
-
   if (timer().interval === 0) return e.preventDefault();
   let position = getCaretPosition(e.target);
   if (e.keyCode === 32 || e.keyCode === 13) {
     e.preventDefault();
     charIndex = 0;
-    if (input.length) {
-      dataArray.push(currentWord);
-      writtenDataArray.push(input);
-      wordIndex++;
-    }
+    if (!input.length) return;
+    dataArray.push(currentWord);
+    writtenDataArray.push(input);
+    wordIndex++;
     if (selectInput.textContent === currentWord) {
       charCounter += input.length;
       wordsCounter++;
@@ -100,9 +98,8 @@ selectInput.addEventListener("keydown", (e) => {
   if (e.keyCode === 8 && charIndex >= 1 && position > 0) {
     input = input.slice(0, position - 1) + input.slice(position);
     charIndex--;
-    if (currentWord.slice(0, input.length) == input) {
-      wordsContainer.firstChild.textContent = currentWord.slice(input.length);
-    }
+    if (currentWord.slice(0, input.length) !== input) return;
+    wordsContainer.firstChild.textContent = currentWord.slice(input.length);
   }
 
   if (!keyCodes.includes(e.keyCode)) return;
